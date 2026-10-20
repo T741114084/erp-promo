@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="FDE 工作室：装修公司 ERP 落地案例——从报价到核算的最小业务闭环。驻场梳理业务流程，交付可直接上线跑通的业务系统。"/>
+<title>FDE 工作室｜装修公司 ERP 落地案例：从报价到核算的最小业务闭环</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'PingFang SC','Microsoft YaHei','Segoe UI',Arial,sans-serif; background:#0B1B33; color:#1A2433; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 16px; }
+
+  /* Hero */
+  .hero { background:linear-gradient(160deg,#0E2A52 0%,#0B1B33 60%,#12305E 100%); color:#fff; padding:52px 0 40px; text-align:center; position:relative; overflow:hidden; }
+  .hero::after { content:""; position:absolute; inset:0; background:radial-gradient(ellipse at 80% -20%, rgba(37,99,235,.25), transparent 60%); pointer-events:none; }
+  .badge { display:inline-block; background:rgba(139,200,234,.15); border:1px solid rgba(139,200,234,.45); color:#A9D6F5; font-size:13px; padding:4px 16px; border-radius:999px; letter-spacing:.5px; }
+  .hero h1 { font-size:30px; font-weight:700; margin:18px auto 12px; max-width:820px; line-height:1.35; }
+  .hero .sub { color:#C9DAF0; font-size:15px; max-width:720px; margin:0 auto; }
+  .hero .tags { margin-top:16px; color:#8FB6E8; font-size:13px; letter-spacing:1px; }
+
+  /* CTA strip in hero */
+  .herocta { margin-top:26px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .herocta a { display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:600; font-size:15px; padding:11px 24px; border-radius:999px; transition:.2s; }
+  .herocta a.primary { background:linear-gradient(135deg,#2563EB,#1D4ED8); color:#fff; box-shadow:0 6px 20px rgba(37,99,235,.4); }
+  .herocta a.primary:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(37,99,235,.5); }
+  .herocta a.ghost { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.3); color:#E3EEFF; }
+  .herocta a.ghost:hover { background:rgba(255,255,255,.15); }
+
+  /* Section */
+  .sec { background:#fff; border-radius:16px; margin:20px 0; padding:28px 26px; box-shadow:0 4px 18px rgba(11,27,51,.12); }
+  .sec h2 { font-size:20px; color:#0E2A52; margin-bottom:14px; padding-left:12px; border-left:4px solid #2563EB; }
+  .sec h3 { font-size:16px; color:#0E2A52; margin:16px 0 8px; }
+  p.lead { color:#3D4A5F; font-size:15px; }
+  .muted { color:#6B7280; font-size:13px; }
+  .img { width:100%; border-radius:12px; margin:8px 0; display:block; }
+  .imgcap { text-align:center; color:#6B7280; font-size:12.5px; margin:6px 0 14px; }
+
+  /* Video */
+  .videoBox { background:#000; border-radius:14px; overflow:hidden; margin:10px 0 6px; }
+  .videoBox video { width:100%; display:block; aspect-ratio:16/9; background:#000; }
+  .vnote { color:#6B7280; font-size:12.5px; text-align:center; margin:8px 0 0; }
+  .vnote a { color:#2563EB; }
+
+  /* Lists */
+  ol.steps { padding-left:22px; }
+  ol.steps li { margin:6px 0; color:#33415A; }
+
+  /* Feature grid */
+  .grid { display:flex; flex-wrap:wrap; gap:12px; margin-top:10px; }
+  .card { flex:1 1 250px; min-width:0; background:#F4F7FC; border:1px solid #E4EAF5; border-radius:12px; padding:14px 16px; transition:.2s; }
+  .card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(11,27,51,.1); border-color:#C9DDFA; }
+  .card .no { color:#2563EB; font-weight:700; font-size:13px; }
+  .card .t { font-weight:600; color:#0E2A52; margin:2px 0 6px; font-size:15px; }
+  .card .d { color:#4A5568; font-size:13px; }
+
+  /* Value points */
+  .vals { display:flex; flex-wrap:wrap; gap:12px; margin-top:10px; }
+  .val { flex:1 1 250px; min-width:0; background:linear-gradient(135deg,#EAF2FF,#F7FAFF); border:1px solid #D6E4FB; border-radius:12px; padding:16px; }
+  .val .t { font-weight:600; color:#0E2A52; margin-bottom:6px; }
+  .val .d { color:#3D4A5F; font-size:13.5px; }
+
+  /* Service CTA */
+  .service { background:linear-gradient(135deg,#0E2A52,#12305E); color:#fff; border-radius:16px; padding:34px 26px; text-align:center; margin:20px 0; }
+  .service h2 { color:#fff; border-left-color:#60A5FA; }
+  .service p { color:#C9DAF0; max-width:640px; margin:0 auto; }
+  .service .svcgrid { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:20px; }
+  .service .svcitem { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:10px 18px; font-size:14px; }
+
+  /* Contact */
+  .contactwrap { display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin-top:14px; }
+  .ccard { flex:1 1 300px; max-width:400px; background:#fff; border:1px solid #E4EAF5; border-radius:16px; padding:24px 20px; text-align:center; box-shadow:0 4px 14px rgba(11,27,51,.08); }
+  .ccard .icon { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:24px; }
+  .ccard.phone .icon { background:linear-gradient(135deg,#2563EB,#1D4ED8); }
+  .ccard.wechat .icon { background:linear-gradient(135deg,#22C55E,#16A34A); }
+  .ccard .label { color:#6B7280; font-size:13px; letter-spacing:1px; }
+  .ccard .value { font-size:22px; font-weight:700; color:#0E2A52; margin:6px 0 10px; letter-spacing:1px; }
+  .ccard .hint { color:#8A94A6; font-size:12.5px; }
+  .ccard a.tel { text-decoration:none; color:inherit; display:block; }
+  .ccard .qrbox { width:200px; height:200px; margin:0 auto; border-radius:12px; padding:10px; background:#fff; border:1px solid #E4EAF5; box-shadow:0 0 0 4px #EAF2FF; }
+  .ccard .qrbox img { width:100%; height:100%; object-fit:contain; display:block; border-radius:6px; }
+  .ccard .qrnote { margin-top:10px; color:#16A34A; font-size:13px; font-weight:600; }
+
+  .cta { background:linear-gradient(135deg,#2563EB,#1D4ED8); color:#fff; text-align:center; padding:18px 16px; border-radius:12px; margin-top:14px; font-size:16px; font-weight:600; }
+
+  footer { color:#7C8FB2; text-align:center; font-size:12.5px; padding:18px 0 30px; }
+  @media (max-width:600px){ .hero h1{font-size:22px;} .sec{padding:20px 16px;} .contactwrap{flex-direction:column;} .ccard{max-width:none;} }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <span class="badge">FDE · 业务系统定制案例</span>
+    <h1>装修公司 ERP 落地：<br/>从报价到核算的最小业务闭环</h1>
+    <p class="sub">我是装修公司老板，也是 FDE 工作室主理人。这套系统不是高大上的 SaaS，是把线下真实生意翻译成一套可直接跑通的管理 SOP——报价、合同、施工、收款、核算，一套系统到底。</p>
+    <div class="tags">#FDE　#业务系统定制　#ERP定制</div>
+    <div class="herocta">
+      <a class="primary" href="tel:13265528512">📞 电话咨询：13265528512</a>
+      <a class="ghost" href="#contact">👇 扫码加微信聊聊</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- VIDEO -->
+  <div class="sec">
+    <h2>现场演示：28 分钟完整业务流程实操</h2>
+    <p class="lead">从新建项目、分项报价、生成报价单，到合同签订、施工管控、采购入库、收款核销、完工核算，全程真实操作演示。</p>
+    <div class="videoBox">
+      <video controls preload="metadata" poster="assets/demo-cover.jpg">
+        <source src="https://aka.doubaocdn.com/s/nBUKcjKqlG" type="video/mp4"/>
+        您的浏览器不支持视频播放，请 <a href="https://aka.doubaocdn.com/s/nBUKcjKqlG">点击这里下载观看</a>（MP4 · 720P）。
+      </video>
+    </div>
+    <p class="vnote">视频约 28 分钟 · 演示环境数据 · 无法播放时可<a href="https://aka.doubaocdn.com/s/nBUKcjKqlG" target="_blank" rel="noopener">点此直接打开视频</a></p>
+  </div>
+
+  <!-- WHY -->
+  <div class="sec">
+    <h2>为什么自己动手做一套 ERP</h2>
+    <p class="lead">昂贵的管理软件用不起，通用 SaaS 又不贴合装修生意的实际流程。项目一多，报价靠表格、合同靠模板、催款靠电话、对账靠翻聊天记录，效率和利润都漏在细节里。</p>
+    <ol class="steps">
+      <li>前期商务环节慢：报价改价来回传文件，客户等、自己累</li>
+      <li>施工期靠催：供应商、班组进度全靠电话盯，项目拖延不知道卡在哪个环节</li>
+      <li>完工算不清账：已付款、待回款、盈亏没有一本明白账</li>
+    </ol>
+  </div>
+
+  <!-- THREE STEPS -->
+  <div class="sec">
+    <h2>FDE 三步法：把线下生意翻译成系统</h2>
+    <ol class="steps">
+      <li><b>梳理业务</b>：找到 AI 提效切入点，看清哪些环节最耗人、最容易漏钱</li>
+      <li><b>搭建闭环</b>：把业务流程串成「报价 → 合同 → 施工 → 收款 → 核算」的完整闭环</li>
+      <li><b>固化规则</b>：把线下经验变成可自动执行的系统规则（增项必须书面确认才计入结算、对账不平必须列出差异项）</li>
+    </ol>
+    <img class="img" src="assets/business-closed-loop.jpg" alt="最小业务闭环：报价与合同 → 施工管控 → 采购入库 → 完工核算"/>
+    <p class="imgcap">最小业务闭环：报价与合同 → 施工管控 → 采购入库 → 完工核算</p>
+  </div>
+
+  <!-- MODULES -->
+  <div class="sec">
+    <h2>系统能跑什么：9 大环节全覆盖</h2>
+    <p class="lead">以下功能还原自系统实操演示，每一步都是真实可跑的能力。</p>
+    <div class="grid">
+      <div class="card"><div class="no">01</div><div class="t">项目建档</div><div class="d">新建项目自动生成档案，编号自动生成（如 PRJ-2026-008），备注可选填</div></div>
+      <div class="card"><div class="no">02</div><div class="t">分项报价</div><div class="d">选类目（环氧地坪/翻新乳胶漆/砌墙等）、填数量、改单价，金额自动计算</div></div>
+      <div class="card"><div class="no">03</div><div class="t">报价单</div><div class="d">单头编号自动生成；含税/优惠/商务条款可配置；客户版 + 内部谈判版双导出，内部版带函数实时算利润率，防止亏损签单</div></div>
+      <div class="card"><div class="no">04</div><div class="t">合同签订</div><div class="d">录入编号、金额、质保月；一键按模板生成收款节点，预期预警与催办自动生效；导出合同与台账</div></div>
+      <div class="card"><div class="no">05</div><div class="t">施工管控</div><div class="d">工序逐项勾验并记录验收人与时间；不合格自动进入返工流程；增项提交确认后才施工</div></div>
+      <div class="card"><div class="no">06</div><div class="t">采购入库</div><div class="d">采购单待下单 → 材料入库，成本自动归属对应工地与采购人；支持比价、新增材料</div></div>
+      <div class="card"><div class="no">07</div><div class="t">收款核销</div><div class="d">收款节点 3331（30/30/30/10），开工定金 30%；逐笔核销结清、登记付款，开工/停工/完工一键切换</div></div>
+      <div class="card"><div class="no">08</div><div class="t">回款台账</div><div class="d">应收 − 已收 = 欠款，逐笔可追溯；月度经营情况清晰显示</div></div>
+      <div class="card"><div class="no">09</div><div class="t">预警中心</div><div class="d">缺成本预算、增项超上限、成本超支、应收逾期自动预警；标记已处理，一键立即重算</div></div>
+    </div>
+    <p class="muted" style="margin-top:12px;">演示数据（视频实录，仅供了解能力）：合同 PRJ-2026-008 · 面积 450㎡ · 金额 ¥102,563.00 · 付款节点与合同金额逐笔相符 · 增项上限 8%（¥8,205.04）。</p>
+  </div>
+
+  <!-- VALUE -->
+  <div class="sec">
+    <h2>这套系统解决了什么</h2>
+    <div class="vals">
+      <div class="val"><div class="t">前期商务提速</div><div class="d">内卷环境下，快速搞定报价、合同等前期商务环节，适合中小企业、一人公司老板搭建最小业务闭环</div></div>
+      <div class="val"><div class="t">项目进度实时管控</div><div class="d">签单后实时管控项目进度，不用反复电话催供应商，减少项目拖延</div></div>
+      <div class="val"><div class="t">完工轻松核算</div><div class="d">已付款、待回款、盈亏情况一目了然</div></div>
+    </div>
+    <img class="img" src="assets/value-points.jpg" alt="三大价值：前期商务提速、项目进度实时管控、完工轻松核算"/>
+    <p class="muted" style="margin-top:10px;">可预见的未来：工厂、门店、仓库，各行各业都需要有人把线下真实业务流程，翻译成可直接运行的业务系统——这就是 FDE 的位置。</p>
+  </div>
+
+  <!-- SERVICE -->
+  <div class="service">
+    <h2>工作室服务</h2>
+    <p>驻场梳理业务流程，交付一套可以直接上线跑通的系统。你出业务场景，我把它翻译成能跑的系统。</p>
+    <div class="svcgrid">
+      <span class="svcitem">业务流程梳理</span>
+      <span class="svcitem">系统搭建落地</span>
+      <span class="svcitem">规则固化</span>
+      <span class="svcitem">私有化部署</span>
+      <span class="svcitem">演示验收</span>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="sec" id="contact">
+    <h2>联系与交流</h2>
+    <p class="lead" style="text-align:center;margin-bottom:6px;">微信或电话，随时交流你的业务场景。</p>
+    <div class="contactwrap">
+      <div class="ccard phone">
+        <div class="icon">📞</div>
+        <div class="label">联系电话</div>
+        <a class="tel" href="tel:13265528512"><div class="value">13265528512</div></a>
+        <div class="hint">点击号码即可直接拨打</div>
+      </div>
+      <div class="ccard wechat">
+        <div class="icon">💬</div>
+        <div class="label">微信扫码交流</div>
+        <div class="qrbox"><img src="assets/wechat-qr.jpg" alt="微信二维码"/></div>
+        <div class="qrnote">长按识别二维码，添加我为好友</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>FDE · 装修 ERP 案例 · 私有化部署 · 数据不出本机</footer>
+
+</body>
+</html>
